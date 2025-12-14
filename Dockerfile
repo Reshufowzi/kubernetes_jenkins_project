@@ -13,4 +13,3 @@ RUN curl -L -o photogenic.zip \
 EXPOSE 80
 
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-]
