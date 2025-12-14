@@ -1,7 +1,7 @@
-FROM centos:7
+FROM rockylinux:8
 
-RUN yum install -y httpd zip unzip curl ca-certificates \
-    && yum clean all
+RUN dnf install -y httpd zip unzip curl ca-certificates \
+    && dnf clean all
 
 WORKDIR /var/www/html
 
@@ -13,3 +13,4 @@ RUN curl -L -o photogenic.zip \
 EXPOSE 80
 
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
