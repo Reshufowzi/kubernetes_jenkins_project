@@ -18,7 +18,7 @@ RUN unzip photogenic.zip && \
     rm -rf photogenic photogenic.zip
 
 # Expose HTTP port
-EXPOSE 80 443
+EXPOSE 80
 
 # Start Apache in foreground
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
