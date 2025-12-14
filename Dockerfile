@@ -1,24 +1,16 @@
 FROM centos:7
 
-LABEL maintainer="reshufowzi29@gmail.com"
+RUN yum install -y httpd zip unzip curl ca-certificates \
+    && yum clean all
 
-# Install required packages
-RUN yum install -y httpd zip unzip && \
-    yum clean all
+WORKDIR /var/www/html
 
-# Download website template
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
+RUN curl -L -o photogenic.zip \
+    https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip \
+    && unzip photogenic.zip \
+    && rm -f photogenic.zip
 
-# Set working directory
-WORKDIR /var/www/html/
-
-# Unzip and move files
-RUN unzip photogenic.zip && \
-    cp -rvf photogenic/* . && \
-    rm -rf photogenic photogenic.zip
-
-# Expose HTTP port
 EXPOSE 80
 
-# Start Apache in foreground
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+]
